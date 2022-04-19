@@ -3,5 +3,4 @@ project/
 target/
 *.log
 build.sbt
-module*/
 .DS_Store

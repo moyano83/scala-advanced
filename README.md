@@ -1,3 +1,11 @@
+# Note
+
+The following notes were compiled from the courses available in udemy:
+
+[Part1](https://www.udemy.com/course/scala-advanced-part-1-the-scala-type-system)
+[Part2](https://www.udemy.com/course/scala-advanced-part-2)
+[Part3](https://www.udemy.com/course/scala-advanced-part-3-functional-programming-performance)
+
 # Scala Type System - Part 1
 
 ## Properties and State
