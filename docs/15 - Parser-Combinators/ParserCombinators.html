@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parser Combinators</title>
+    <meta charset="utf-8">
+        <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-slide-content:after {  
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 100px;
+        height: 40px;
+        width: 120px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url('data:image/gif;base64,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');
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Parser Combinators
+
+### External DSLs Using the Scala Library
+
+---
+
+# Agenda
+
+1. Internal vs External DSLs
+
+2. A Basic Grammar
+
+3. Simple Parser Combinators
+
+4. Regex and Java Parsers
+
+5. Transformers
+
+6. Richer Parser Types
+
+7. Syntax Recap
+
+8. Completing the Parser
+
+9. Packrat Parsers
+
+10. Alternatives to the Parser Combinator Library
+
+
+
+---
+
+# Internal vs External DSLs
+
+Internal DSLs must work within the confines of the Scala language, and type-check:
+
+```scala
+test ("internal DSL examples") {
+  x should be (10)  // need the parens
+  x should not be 11  // no parens needed
+  intercept [MalformedURLException] {
+    new URL("bad bad bad")
+  }
+}
+```
+
+Scala is flexible in this regard, but you can't do (e.g.):
+
+```basic
+10 PRINT "Hello, World"
+20 PRINT "Item1", "Item2"
+30 FOR x = 1 TO 10 BY 2
+40 PRINT "yo"
+50 NEXT
+60 GOTO 10
+```
+
+For that, you need to construct an external DSL
+
+---
+
+# A Basic Grammar
+
+```
+lineNumber ::= positiveInt.
+
+int ::= wholeNumber.
+
+variable ::= ident.
+
+printList ::= stringLiteral { "," stringLiteral }. 
+
+print ::= "PRINT" printList.
+
+for ::= "FOR" ident "=" int "TO" int [ "BY" int ].
+
+next ::= "NEXT".
+
+goto ::= "GOTO" lineNumber.
+
+validStatement ::= print | for | next | goto.
+
+validLine ::= lineNumber validStatement.
+```
+
+This is a simple subset of Basic that we will implement using the Scala parser combinator library
+
+---
+
+# Simple Parser Combinators 
+
+Start with the string based tokens:
+
+```scala
+libraryDependencies += 
+  "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.6"
+
+  object BasicParser extends JavaTokenParsers {
+    def gotos:  Parser[String] = "GOTO"
+    def fors:   Parser[String] = "FOR"
+    def tos:    Parser[String] = "TO"
+    def bys:    Parser[String] = "BY"
+    def nexts:  Parser[String] = "NEXT"
+    def prints: Parser[String] = "PRINT"
+
+    ...
+
+```
+
+---
+
+# Regex vs Java Token Parsers
+
+* RegexParsers
+
+  * Whitespace matching and handling
+
+  * String and Regex implicits
+
+
+
+* JavaTokenParsers
+
+  * Not really Java, more "Java-like"
+
+  * Extends RegexParsers
+
+  * Adds ident, wholeNumber, decimalNumber, floatingPointLiteral, stringLiteral
+
+---
+
+# Non Strings, and Transformers
+
+E.g. An Int Parser (with a Transformer)
+
+```scala
+def int: Parser[Int] = wholeNumber ^^ { n => n.toInt }
+```
+
+
+
+* `Parser[Int]` instead of `Parser[String]`
+
+
+
+* `wholeNumber` from `JavaTokenParsers`
+
+
+
+* `^^` transforms from the parsed type (in this case String) to the desired one (Int)
+
+
+
+* The function after the `^^` is responsible for that type transformation
+
+---
+
+# Richer Parser Types
+
+E.g. transforming to case classes:
+
+```scala
+case class LineNumber(line: Int)
+def lineNumber: Parser[LineNumber] = 
+    """\d+""".r ^^ { ln => LineNumber(ln.toInt) }
+
+case class Variable(name: String)
+def variable: Parser[Variable] = ident ^^ { v => Variable(v) }
+```
+
+
+
+* `"""\d+""".r` is the regex for a positive number (and implicitly converted by `RegexParsers`)
+
+
+
+* Result still comes in as String initially, convert to Int and put into case class
+
+
+
+* For `Variable`, String is just put straight into the case class
+
+---
+
+# The StatementLine ADT
+
+```scala
+sealed trait StatementLine
+
+case class Print(printList: Seq[String]) extends StatementLine
+
+case class For(variable: Variable, start: Int, end: Int, by: Option[Int]) 
+extends StatementLine
+
+case class Goto(lineNumber: LineNumber) extends StatementLine
+
+case object Next extends StatementLine
+
+case class CompleteLine(line: LineNumber, statement: StatementLine)
+```
+
+---
+
+# Next and Goto
+
+```scala
+def nextStatement: Parser[Next.type] = 
+    nexts ^^ { next => Next } // param ignored
+
+def gotoStatement: Parser[Goto] = 
+    gotos ~ lineNumber ^^ {
+      case g ~ ln => Goto(ln)
+    } 
+
+// or
+def gotoStatement: Parser[Goto] = 
+    gotos ~> lineNumber ^^ Goto
+
+```
+
+* ~ connects multiple parsers
+
+
+
+* ~ used again in pattern-match within transformer
+
+
+
+* ~> and <~ match but throw away tokens to left and right, respectively
+
+---
+
+# BNF to Scala Parser Combinators
+
+* `::=` becomes `: Parser[T]`
+
+
+
+* For Alternatives: `parser1 | parser2 | parser3`
+
+
+
+* Sequential Composition with `~` (or `~>` or `<~`)
+
+
+
+* Transform: `^^ (A => B)`
+
+
+
+* For Repetition: `rep(parser)`, or `repsep(parser, separator)`
+
+
+
+* For Optional: `opt(parser)`
+
+---
+
+# Print (with possible repeating list)
+
+```scala
+def printList: Parser[Seq[String]] = 
+    repsep(stringLiteral, ",")
+
+def printStatement: Parser[Print] = 
+    prints ~> printList ^^ { pl => Print(pl) }
+```
+
+* Result of `rep` and `repsep` come in as a `Seq[T]`
+
+
+
+* `,` is the separator
+
+
+
+* Just one token and no separators is valid, as are zero tokens
+
+---
+
+# For Statement
+
+```scala
+def byPart: Parser[Int] = bys ~> int
+
+def forStatement: Parser[For] =
+  fors ~ variable ~ "=" ~ int ~ tos ~ int ~ opt(byPart) ^^ 
+  {
+    case _ ~ vname ~ _ ~ froml ~ _ ~ tol ~ optBy => 
+     For(vname, froml, tol, optBy)
+  }
+```
+
+* `~` and `_` combination often simpler than `~>` and `<~`
+
+
+
+* `opt(parser)` comes in as `Option[T]`
+
+---
+
+# A Complete Line, and Parsing
+
+```scala
+def completeLine: Parser[CompleteLine] =
+  lineNumber ~ 
+    (printStatement | gotoStatement | nextStatement | forStatement) ^^ {
+      case lineNumber ~ statement => CompleteLine(lineNumber, statement)
+    }
+
+def apply(input: String): CompleteLine = 
+  parseAll(completeLine, input) match {
+    case Success(result, _) => result
+    case failure : NoSuccess => scala.sys.error(failure.msg)
+  }
+```
+
+---
+
+# Let's Give It a Whirl
+
+```scala
+BasicParser("40 NEXT")
+CompleteLine(LineNumber(40), Next)
+
+BasicParser("60 GOTO 10")
+CompleteLine(LineNumber(60), Goto(LineNumber(10)))
+
+BasicParser("70 PRINT")
+CompleteLine(LineNumber(70), Print(Seq.empty[String]))
+
+BasicParser("10 PRINT \"hello world\"")
+CompleteLine(LineNumber(10),Print(List("hello world")))
+
+BasicParser("20 PRINT \"item1\", \"item2\"")
+CompleteLine(LineNumber(20), Print(Seq("item1", "item2")))
+
+BasicParser("30 FOR x = 1 TO 20")
+CompleteLine(LineNumber(30), For(Variable("x"), 1, 20, None))
+
+BasicParser("30 FOR x = 0 TO 20 BY 2")
+CompleteLine(LineNumber(30), For(Variable("x"), 0, 20, Some(2)))
+
+BasicParser("10 PRINT \"hello\" \"No sep\"")
+java.lang.RuntimeException: `,' expected but `"' found ...
+```
+
+---
+
+# Packrat Parsers
+
+* For certain parser that would otherwise be impossible (e.g. "left recursive")
+
+
+
+* Mix in the `PackratParsers` trait
+
+
+
+* `:Parser[T]` becomes `:PackratParser[T]`
+
+
+
+* Replace `def` with `lazy val`
+
+
+
+```scala
+object BasicParser extends JavaTokenParsers with PackratParsers {
+  //…
+  lazy val completeLine: PackratParser[CompleteLine] =
+    lineNumber ~ 
+      (printStatement | gotoStatement | nextStatement | forStatement) ^^ {
+    	case lineNumber ~ statement => CompleteLine(lineNumber, statement)
+      }
+
+```
+
+
+
+
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        highlightLanguage: 'scala',
+        highlightStyle: 'solarized-light'
+      });
+    </script>
+
+
+  </body>
+</html>

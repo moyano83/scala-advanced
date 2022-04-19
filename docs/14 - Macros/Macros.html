@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Macros</title>
+    <meta charset="utf-8">
+        <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-slide-content:after {  
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 100px;
+        height: 40px;
+        width: 120px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url('data:image/gif;base64,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');
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Macros
+
+### How to (not) use Macros in Scala
+
+---
+
+# Agenda
+
+1. The First Rule of Macros
+
+2. Compiler Phases
+
+3. Abstract Syntax Trees
+
+4. Macro Overview
+
+5. A Demo Macro
+
+6. Quasiquotes
+
+7. Compiler Errors
+
+8. Macro Limitations
+
+
+
+---
+
+# The First Rule of Macros
+
+--
+
+* Don't use Macros
+
+---
+
+# Scala Compiler Phases
+
+```bash
+dwall@Tyche:~/dev/Scala/Training$ scala -Xshow-phases
+    phase name  id  description
+    ----------  --  -----------
+        parser   1  parse source into ASTs, perform simple desugaring
+         namer   2  resolve names, attach symbols to named trees
+packageobjects   3  load package objects
+         typer   4  the meat and potatoes: type the trees
+        patmat   5  translate match expressions
+superaccessors   6  add super accessors in traits and nested classes
+    extmethods   7  add extension methods for inline classes
+       pickler   8  serialize symbol tables
+     refchecks   9  reference/override checking, translate nested objects
+       uncurry  10  uncurry, translate function values to anonymous classes
+        fields  11  synthesize accessors and fields, add bitmaps for lazy vals
+     tailcalls  12  replace tail calls by jumps
+    specialize  13  @specialized-driven class and method specialization
+ explicitouter  14  this refs to outer pointers
+       erasure  15  erase types, add interfaces for traits
+   posterasure  16  clean up erased inline classes
+    lambdalift  17  move nested functions to top level
+  constructors  18  move field definitions into constructors
+       flatten  19  eliminate inner classes
+         mixin  20  mixin composition
+       cleanup  21  platform-specific cleanups, generate reflective calls
+    delambdafy  22  remove lambdas
+           jvm  23  generate JVM bytecode
+      terminal  24  the last phase during a compilation run
+```
+
+
+
+---
+
+# Abstract Syntax Trees
+
+```scala
+object Demo {
+  def times(n: Int): Seq[Int] = for (x <- 1 to n) yield x * x
+  val timesTo10 = times(10)
+}
+```
+
+`scalac -Ybrowse:typer Demo.scala`
+
+![](scala-ast.png)
+
+---
+
+# Macro Overview
+
+* Macros fire after the typer phase of the compiler
+
+
+
+* Create a method with the signature you want, that calls another method using the `macro` keyword
+
+
+
+* Create the macro method to take the AST and return another AST (maybe altered)
+
+
+
+* Use pattern matching and/or quasiquotes to disassemble, and potentially alter the AST
+
+
+
+* Provide warnings or errors to the compiler along the way
+
+---
+
+# A Demo Macro
+
+```scala
+scala> val fn = (x: Int) => x + 1
+fn: Int => Int = $$Lambda$1002/1287401019@2975a9e
+```
+
+what if we could get a better function name?
+
+```scala
+fn: Int => Int = ((x: Int) => x + 1)
+```
+
+Let's see if we can use macros to get there
+
+---
+
+# Setting up the Pieces
+
+```scala
+class NamedFunction[-T, +R](val name: String, fn: T => R) extends (T => R) {
+  def apply(x: T): R = fn(x)
+  override def toString: String = name
+}
+```
+
+A simple function derivative/wrapper with a name, so we can do this:
+
+```scala
+val inc: Int => Int = (x: Int) => x + 1
+// inc: Int => Int = $$Lambda$1002/1287401019@2975a9e
+
+val incNamed: Int => Int =
+  new NamedFunction("((x: Int) => x + 1)", (x: Int) => x + 1)
+// incNamed: Int => Int = ((x: Int) => x + 1)
+
+val xs = List(1,2,3,4,5)
+
+xs.map(inc)      // res0: List[Int] = List(2, 3, 4, 5, 6)
+xs.map(incNamed) // res1: List[Int] = List(2, 3, 4, 5, 6)
+```
+
+This has the result we want, but at the cost of having to write the function twice (once as a string)
+
+---
+
+# A Basic Macro that Does Nothing
+
+Let's start out with a macro that takes a function and just returns the same thing first.
+
+```scala
+import scala.language.experimental.macros
+import scala.reflect.macros.blackbox
+
+object SimpleMacro {
+  def describeFn(expr: Int => Int): Int => Int = macro namedImpl
+
+  def namedImpl(c: blackbox.Context)
+    (expr: c.Expr[Int => Int]): c.Expr[Int => Int] = expr
+}
+```
+
+```scala
+val fn = SimpleMacro.describeFn((x: Int) => x + 1)  // works but only Int => Int
+val fn2 = SimpleMacro.describeFn((x: Double) => x.toString) // does not compile
+```
+
+Let's make it work for any `Function1` with generics
+
+---
+
+# A Macro with Generic Parameters
+
+```scala
+import scala.language.experimental.macros
+import scala.reflect.macros.blackbox
+
+object SimpleMacro {
+  def describeFn[T, R](expr: T => R): T => R = macro namedImpl[T, R]
+
+  def namedImpl[T, R](c: blackbox.Context)
+    (expr: c.Expr[T => R]): c.Expr[T => R] = expr
+}
+```
+
+```scala
+val fn = SimpleMacro.describeFn((x: Int) => x + 1)  // works
+val fn2 = SimpleMacro.describeFn((x: Double) => x.toString) // so does this
+```
+
+But so far, this is a supremely useless macro,
+
+Let's make it do something
+
+---
+
+# Quasiquotes
+
+While we could use pattern matching on the AST, there's an easier way:
+
+```scala
+import scala.reflect.runtime.universe._
+
+val fnTree = q"(x: Int) => x + 1"
+showCode(fnTree)  // res0: String = ((x: Int) => x.+(1))
+
+val aVal = q"val x = 10"
+aVal match {
+  case q"val x = $v" => "The value is $v"
+} // res1: String = The value is 10
+```
+
+Quasiquotes can both construct and extract ASTs
+
+```scala
+val aSeq = q"Seq(1,2,3)"
+
+aSeq match {
+  case q"Seq(..$x)" => x  // .. denotes multiple
+} // List(1,2,3)
+```
+
+---
+
+# Doing More with Quasiquotes 
+
+```scala
+class Animal
+trait HasLegs
+trait Reptile
+
+val cd =
+  q"""class Frog extends Animal with HasLegs with Reptile {
+      val color: String = "green"
+  }"""
+
+val q"class $c extends $s with ..$t {..$b}" = cd
+
+// c: reflect.runtime.universe.TypeName = Frog
+// s: reflect.runtime.universe.Tree = Animal
+// t: List[reflect.runtime.universe.Tree] = 
+//   List(HasLegs, Reptile)
+// b: List[reflect.runtime.universe.Tree] =
+//   List(val color: String = "green")
+
+```
+
+---
+
+# A Function Describing Macro
+
+```scala
+object FunctionMacros {
+  def describeFn[T, R](expr: T => R): NamedFunction[T, R] = macro namedImpl[T, R]
+
+  def namedImpl[T, R](c: blackbox.Context)(expr: c.Expr[T => R]):
+      c.Expr[NamedFunction[T, R]] = {
+    import c.universe._
+    val name = expr.tree match {
+      case q"$fn" => fn.toString
+    }
+
+    c.Expr[NamedFunction[T, R]](q"""new NamedFunction($name, $expr)""")
+  }
+}
+```
+
+---
+
+# Return Type Narrowing
+
+Note that the return type of the `describeFn` is now more specific
+
+```scala
+val f2 = describeFn((x: Int) => x + 1)
+// f2: com.escalatesoft.macros.NamedFunction[Int,Int] = ((x: Int) => x.+(1))
+```
+
+We don't have to do this, and indeed we can also safely up-cast it:
+
+```scala
+val f3: Int => Int = describeFn((x: Int) => x + 1)
+// f3: Int => Int = ((x: Int) => x.+(1))
+```
+
+---
+
+# Compiler Warnings and Errors
+
+Suppose we want to warn if a macro name will end up being too many characters, say over 100?
+
+```scala
+def namedImpl[T, R](c: blackbox.Context)(expr: c.Expr[T => R]):
+    c.Expr[NamedFunction[T, R]] = {
+  import c.universe._
+  val name = expr.tree match {
+    case q"$fn" => fn.toString
+  }
+  if (name.length > 100) c.warning(c.enclosingPosition,
+    s"Function length exceeds recommended limit for auto-describe")
+
+  c.Expr[NamedFunction[T, R]](q"""new NamedFunction($name, $expr)""")
+}
+```
+
+You can also use `c.error` or `c.abort` in place of `c.warning` to escalate this to a compile error.
+
+---
+
+# Macro Limitations
+
+* Since the macro fires after the `typer` phase, the scala code must type-check before a macro can be used, i.e. the scala syntax must be valid before the macro is applied, the macro cannot "fix" invalid syntax
+
+
+
+* Desugaring will already have occurred by the time you get the AST, e.g. our `((x: Int) => x.+(1))` instead of `((x: Int) => x + 1)`
+
+
+
+* Macros can only be used in method positions, i.e. there must be a method call around the expression to be passed to the macro
+
+
+
+* While a blackbox macro can specialize the return type (as in our example), it must follow the type signature rules. Whitebox macros relax this restriction a little, allowing a macro to potentially return different types, but at the expense of understandability and also usually tooling problems/confusion (e.g. IDEs have trouble following the types)
+
+---
+
+# Final Words
+
+Macros are a seductive technology, but one with a high cost.
+
+Alternatives such as type classes, implicit constraints and skillful use of the type system as a whole often lessen or remove the need for Macros, offer a tighter and more disciplined approach, and are preferred.
+
+Macros are experimental and likely to change.
+
+The seductive, quick magic that macros offer will come back to bite you (they have every time I have used them).
+
+Wise libraries, if they use macros at all, use them for the absolute minimum necessary functionality and use the type system and implicits for everything they possibly can (e.g. Shapeless)
+
+
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        highlightLanguage: 'scala',
+        highlightStyle: 'solarized-light'
+      });
+    </script>
+
+
+  </body>
+</html>
